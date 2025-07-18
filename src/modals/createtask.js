@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-const Createtask = ({modal, toggle}) => {
+const Createtask = ({modal, toggle,save}) => {
     const [taskName, setTaskName]=useState('');
     const[description, setDescription]= useState('');
     const handleChange =(e)=>{
@@ -11,6 +11,12 @@ const Createtask = ({modal, toggle}) => {
         else{
             setDescription(value)
         }
+    }
+    const handleSave=()=>{
+        let taskObj={}
+        taskObj["Name"]=taskName
+        taskObj["Description"]=description
+        save(taskObj)
     }
     return (
         <Modal isOpen={modal} toggle={toggle}>
@@ -30,7 +36,7 @@ const Createtask = ({modal, toggle}) => {
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                <Button color="primary" onClick={toggle}>
+                <Button color="primary" onClick={handleSave}>
                     Create
                 </Button>{' '}
                 <Button color="secondary" onClick={toggle}>
